@@ -32,7 +32,7 @@ p
 
 Do the same for `artisan`:
 
-    % echo 'alias 3source-artisan="docker run --privileged=true --volumes-from myapp-data --rm dylanlindgren/docker-laravel-artisan"' >> "$SHELLCONFIG"
+    % echo 'alias 3source-artisan="docker run --privileged=true --volumes-from 3source-data --rm dylanlindgren/docker-laravel-artisan"' >> "$SHELLCONFIG"
     % source "$SHELLCONFIG"
 
 Then clone in the git repository to the www directory
