@@ -22,13 +22,13 @@ Create the necessary directories:
 
 Map the data container:
 
-    % docker run --name myapp-data -v $HOME/Code/3source:/data:rw dylanlindgren/docker-laravel-data  
+    % docker run --name 3source-data -v $HOME/Code/3source:/data:rw dylanlindgren/docker-laravel-data  
 
+*Note:* On windows you need to separate the path after `-v` with semicolons (`;`) instead of colons (`:`)
 Setup an alias to run `composer` from the docker container:
-p
 
     % SHELLCONFIG="$HOME/.zshrc" # you may use bash or someting else
-    % echo 'alias 3source-composer="docker run --privileged=true --volumes-from myapp-data --rm dylanlindgren/docker-laravel-composer"' >> "$SHELLCONFIG"
+    % echo 'alias 3source-composer="docker run --privileged=true --volumes-from 3source-data --rm dylanlindgren/docker-laravel-composer"' >> "$SHELLCONFIG"
 
 Do the same for `artisan`:
 
