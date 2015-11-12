@@ -37,6 +37,7 @@ Do the same for `artisan`:
 
 Then clone in the git repository to the www directory
 
+    % cd ~/Code/source
     % git clone https://github.com/mogria/3source www
 
 Go into the repo:
@@ -45,7 +46,8 @@ Go into the repo:
     
 Update the dependencies:
 
-    % 3source-composer update
+    % 3source-composer self-update
+    % 3source-composer install
 
 Run the webserver:
 
