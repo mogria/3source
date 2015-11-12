@@ -1,0 +1,23 @@
+{
+  "name": "3source",
+  "description": "web based RPG",
+  "main": "",
+  "authors": [
+    "Mogria",
+    "alkazua"
+  ],
+  "license": "GPLv2+",
+  "homepage": "https://github.com/mogria/3source",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.7"
+  }
+}
