@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>3source</title>
-        {!! HTML::style(URL::asset('app.scss')) !!}
+        {!! HTML::style('css/app.css') !!}
     </head>
     <body>
         <div class="container">
