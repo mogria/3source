@@ -1,57 +1,60 @@
 # 3 source
 
-
 # Developer Installation
 
-We used the docker containers as explained in this article: [docker]
+As a base for our docker setup this artical was a great help: [Dylan Lindgren on Laravel and Docker][docker]
 
-[docker]: <http://dylanlindgren.com/docker-for-the-laravel-framework>
+* First download all the necessary docker containers
 
-First install all the necessary docker containers:
+        % docker pull mogria/3source-data && \
+          docker pull mogria/3source-composer && \
+          docker pull mogria/3source-artisan && \
+          docker pull dylanlindgren/docker-laravel-phpfpm && \
+          docker pull dylanlindgren/docker-laravel-nginx && \
+          docker pull dylanlindgren/docker-laravel-bower
 
-    % docker pull dylanlindgren/docker-laravel-data && \
-      docker pull dylanlindgren/docker-laravel-composer && \
-      docker pull dylanlindgren/docker-laravel-artisan && \
-      docker pull dylanlindgren/docker-laravel-phpfpm && \
-      docker pull dylanlindgren/docker-laravel-nginx && \
-      docker pull dylanlindgren/docker-laravel-bower
+* Create the necessary directories:
 
-Create the necessary directories:
+        % mkdir -p $HOME/Code/3source/logs
 
-    % mkdir -p $HOME/Code/3source/logs
+* Map the data container:
 
-Map the data container:
+        % docker run --name 3source-data -v $HOME/Code/3source:/data:rw mogria/3source-data
 
-    % docker run --name 3source-data -v $HOME/Code/3source:/data:rw dylanlindgren/docker-laravel-data  
+  *Note:* On windows you need to separate the path after `-v` with semicolons (`;`) instead of colons (`:`)
 
-*Note:* On windows you need to separate the path after `-v` with semicolons (`;`) instead of colons (`:`)
-Setup an alias to run `composer` from the docker container:
+* Setup an alias to run `composer` from the docker container:
 
-    % SHELLCONFIG="$HOME/.zshrc" # you may use bash or someting else
-    % echo 'alias 3source-composer="docker run --privileged=true --volumes-from 3source-data --rm dylanlindgren/docker-laravel-composer"' >> "$SHELLCONFIG"
+        % SHELLCONFIG="$HOME/.zshrc" # you may use bash or someting else
+        % echo 'alias 3source-composer="docker run --volumes-from 3source-data --rm mogria/3source-composer"' >> "$SHELLCONFIG"
 
-Do the same for `artisan`:
+* Do the same for `artisan`:
 
-    % echo 'alias 3source-artisan="docker run --privileged=true --volumes-from 3source-data --rm dylanlindgren/docker-laravel-artisan"' >> "$SHELLCONFIG"
-    % source "$SHELLCONFIG"
+        % echo 'alias 3source-artisan="docker run --volumes-from 3source-data --rm mogria/3source-artisan"' >> "$SHELLCONFIG"
+        % source "$SHELLCONFIG"
+  
+* Clone the git repository to the www directory
 
-Then clone in the git repository to the www directory
+        % cd "$HOME/Code/source"
+        % git clone https://github.com/mogria/3source www
 
-    % cd ~/Code/source
-    % git clone https://github.com/mogria/3source www
+* Go into the repo
 
-Go into the repo:
-
-    % cd www
+        % cd www
     
-Update the dependencies:
+* Update the dependencies
 
-    % 3source-composer self-update
-    % 3source-composer install
+        % 3source-composer install
 
-Run the webserver:
+* Check if artisan works too
 
-    % ./start.sh
+        % 3source-artisan
+
+* Run the webserver:
+
+        % ./start.sh
+
+* That's it.
 
 Whats useful is to have this command running on an other terminal to see when errors occur:
 
@@ -64,5 +67,8 @@ You may need to adjust the permissions so laravel can not only access files but 
     % chown -R $USER:www-data bootstrap/cache # may need sudo
     % chmod -R 775 bootstrap/cache
 
+The docker containers used will run under the www-data user.
+
 Now go code!
 
+[docker]: <http://dylanlindgren.com/docker-for-the-laravel-framework> "Dylan Lindgren, Docker for the Laravel Framework"
