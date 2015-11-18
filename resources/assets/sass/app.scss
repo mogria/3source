@@ -18,6 +18,12 @@ html {
   font-size:      20px;
 }
 
+#trailer {
+  height:         5%;
+  width:          400px;
+  //background-image: url("{{ HTML::image('images/background/level0.gif') }}");
+}
+
 #login {
   width:          400px;
   float:          none;
