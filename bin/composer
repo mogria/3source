@@ -1,0 +1,2 @@
+#!/bin/sh
+docker run --volumes-from 3source-data --rm mogria/3source-composer "$@"
