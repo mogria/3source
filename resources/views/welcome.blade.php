@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>3source</title>
+        {!! HTML::style('css/droid-sans-mono-dotted-font.css') !!}
         {!! HTML::style('css/app.css') !!}
         {!! HTML::script('js/jquery-2.1.4.min.js') !!}
         {!! HTML::script('js/spritely-0.6.8/src/jquery.spritely.js') !!}
@@ -12,7 +13,12 @@
         <div id="container">
             <div id="content">
                 <div class="title">Laravel 5</div>
-                <div id="trailer"></div>
+                <div id="trailer">
+                    <marquee class="pan"><<<   <    < </marquee>
+                    <marquee class="pan">   <<<   <   </marquee>
+                    <marquee class="pan"><  <   <<<  <</marquee>
+                    <marquee class="pan"> <<  <<   <<<</marquee>
+                </div>
                 <div id="login">
                     <form>
                         <div class="form-group">

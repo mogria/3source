@@ -1,7 +1,9 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
-html {
+body {
   background:     #2c2c2c;
+  color:          #0A8A0A;
+  font-family:    "Droid Sans Mono Dotted", Monospaced !important;
 }
 
 #container {
@@ -12,16 +14,15 @@ html {
 }
 
 #content {
-  color:          #0A8A0A;
-  font-family:    "Georgia", Times, serif;
   background:     black;
   font-size:      20px;
 }
 
 #trailer {
+  postition:      absolute;
   height:         5%;
-  width:          400px;
-  //background-image: url("{{ HTML::image('images/background/level0.gif') }}");
+  width:          100%;
+  //background-image: url("../images/background/level0.gif");
 }
 
 #login {
@@ -35,6 +36,10 @@ html {
 .title {
   font-size:      42px;
   text-align:     center;
+}
+
+.pan {
+  marquee-speed: fast;
 }
 
 .form-control {
