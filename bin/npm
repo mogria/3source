@@ -1,2 +1,2 @@
 #!/bin/sh
-"$(dirname "$0")/docker" run --volumes-from 3source-data -it --rm mogria/3source-npm npm "$@"
+"$(dirname "$0")/docker" run --volumes-from 3source-data -e RUN_AS=$(id -u) -it --rm mogria/3source-npm npm "$@"
