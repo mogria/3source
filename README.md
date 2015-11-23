@@ -11,7 +11,8 @@ As a base for our docker setup this artical was a great help: [Dylan Lindgren on
           docker pull mogria/3source-artisan && \
           docker pull mogria/3source-npm && \
           docker pull dylanlindgren/docker-laravel-phpfpm && \
-          docker pull dylanlindgren/docker-laravel-nginx
+          docker pull dylanlindgren/docker-laravel-nginx && \
+          docker pull mysql
 
 * Create the necessary directories:
 
