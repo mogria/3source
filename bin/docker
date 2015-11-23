@@ -1,0 +1,13 @@
+#!/bin/sh
+if [ "$(uname -o)" == "Cygwin" ]; then
+    if which console 2>/dev/null >/dev/null; then
+        exec console docker "$@"
+        exit $?
+    fi
+    echo "Cygwin needs the 'console' command from winpty in order to be able"
+    echo "to execute docker run -it."
+    echo "You can get winpty from here: https://github.com/rprichard/winpty"
+    echo "running docker anyway ... "
+fi
+
+exec docker "$@"
