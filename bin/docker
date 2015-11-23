@@ -1,5 +1,5 @@
 #!/bin/sh
-if [ "$(uname -o)" == "Cygwin" ]; then
+if [ "$(uname -o)" = "Cygwin" ]; then
     if which console 2>/dev/null >/dev/null; then
         exec console docker "$@"
         exit $?
