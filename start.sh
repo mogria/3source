@@ -1,10 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
 SOURCE_DIR="$( cd "$(dirname "$0")" && pwd)"
 VOLUME_ROOT="$( cd "$(dirname "$0")/.." && pwd)"
 
 genpw() {
-    tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n1
+    length="$1"
+    tr -cd '[:alnum:]' < /dev/urandom | fold -w "$length" | head -n1
 }
 
 set_dotenv_var() {
@@ -17,8 +18,16 @@ get_container_ip() {
     docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$1"
 }
 
+if [ ! -f ".env" ]; then
+    echo ".env file does not exist, copying from .env.example"
+    cp $SOURCE_DIR/.env.example $SOURCE_DIR/.env
+fi
+
 # generate new password for mysql, and write it to .env
-set_dotenv_var DB_PASSWORD "$(genpw)"
+set_dotenv_var APP_KEY "$(genpw 32)"
+set_dotenv_var DB_DATABASE "3source"
+set_dotenv_var DB_USERNAME "root"
+set_dotenv_var DB_PASSWORD "$(genpw 30)"
 
 # load environment variables
 source "$SOURCE_DIR/.env"
