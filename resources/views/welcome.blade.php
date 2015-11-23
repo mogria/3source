@@ -20,14 +20,20 @@
                     <marquee class="pan"> <<  <<   <<<</marquee>
                 </div>
                 <div id="login">
-                    <form>
+                    <form action="{{ URL::action('Auth\AuthController@postLogin') }}" method="post">
+                        {!! csrf_field() !!}
                         <div class="form-group">
                             <label for="txtUsername">Email address</label>
-                            <input type="text" class="form-control" id="txtUsername" placeholder="Username">
+                            <input name="email" type="text" class="form-control" id="txtUsername" placeholder="Username">
                         </div>
                         <div class="form-group">
                             <label for="txtPassword">Password</label>
-                            <input type="password" class="form-control" id="txtPassword" placeholder="Password">
+                            <input name="password" type="password" class="form-control" id="txtPassword" placeholder="Password">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="chkRemember">Remember me</label>
+                            <input type="checkbox" name="remember" id="chkRemember">
                         </div>
                         <button type="submit" class="btn btn-default">Login</button>
                         <button type="submit" class="btn btn-default">Register</button>
