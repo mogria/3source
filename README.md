@@ -4,16 +4,6 @@
 
 As a base for our docker setup this artical was a great help: [Dylan Lindgren on Laravel and Docker][docker]
 
-* First download all the necessary docker containers
-
-        % docker pull mogria/3source-data && \
-          docker pull mogria/3source-composer && \
-          docker pull mogria/3source-artisan && \
-          docker pull mogria/3source-npm && \
-          docker pull dylanlindgren/docker-laravel-phpfpm && \
-          docker pull dylanlindgren/docker-laravel-nginx && \
-          docker pull mysql
-
 * Create the necessary directories:
 
         % mkdir -p $HOME/Code/3source/logs
@@ -26,6 +16,10 @@ As a base for our docker setup this artical was a great help: [Dylan Lindgren on
 * Go into the repo
 
         % cd www
+
+* Download all the necessary docker containers
+
+        % ./update-docker-images.sh
 
 * Setup development tools. To develop this project `artisan`, `composer`, `npm`, `gulp` and `bower` are required.  
   You can either create some aliases (Option 1), you can use [direnv] (Option 2, recommended), add the bin directory to your own path (Option 3, suboptimal), or do nothing and just type `bin/npm` if you want to use the tools.
@@ -60,6 +54,10 @@ As a base for our docker setup this artical was a great help: [Dylan Lindgren on
         % npm install
         % bower install
 
+* Compile the CSS and javascript
+
+        % gulp
+
 * Check if the other works too:
 
         % artisan
@@ -75,13 +73,6 @@ Whats useful is to have this command running on an other terminal to see when er
 If you're modifying SASS files, run the following command so the files automatically get compiled:
 
     % gulp --watch
-
-You may need to adjust the permissions so laravel can not only access files but also write them:
-
-    % chown -R $USER:www-data storage # may need sudo
-    % chmod -R 775 storage
-    % chown -R $USER:www-data bootstrap/cache # may need sudo
-    % chmod -R 775 bootstrap/cache
 
 The docker containers used will run under the www-data user.
 
