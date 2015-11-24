@@ -1,2 +1,2 @@
 #!/bin/bash
-"$(dirname "$0")/docker-wrap" run --name 3source-phpcli --volumes-from 3source-data -e RUN_AS=$(id -u) --rm mogria/3source-phpcli "$@"
+"$(dirname "$0")/docker-wrap" run --name 3source-phpcli --volumes-from 3source-data -e RUN_AS=$(id -u) -it --rm mogria/3source-phpcli "$@"
