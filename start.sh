@@ -18,10 +18,21 @@ get_container_ip() {
     docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$1"
 }
 
+set_www_data_group() {
+    chown -R $(whoami):www-data "$1" > /dev/null 2> /dev/null
+    chmod -R g+w "$1" > /dev/null 2> /dev/null
+}
+
 if [ ! -f ".env" ]; then
     echo ".env file does not exist, copying from .env.example"
     cp $SOURCE_DIR/.env.example $SOURCE_DIR/.env
 fi
+
+# fix permissions to run nginx and phpfpm under the www-data user
+echo "Set correct permissions for nginx & phpfpm containers"
+set_www_data_group "$VOLUME_ROOT/logs"
+set_www_data_group "$SOURCE_DIR/storage"
+set_www_data_group "$SOURCE_DIR/bootstrap/cache"
 
 # generate new password for mysql, and write it to .env
 set_dotenv_var APP_KEY "$(genpw 32)"
