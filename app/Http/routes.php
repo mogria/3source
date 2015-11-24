@@ -24,3 +24,6 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 
+Route::get('users', 'UserController@index');
+Route::get('users/{id}', 'UserController@show');
+
