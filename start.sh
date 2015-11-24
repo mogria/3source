@@ -23,6 +23,22 @@ set_www_data_group() {
     chmod -R g+w "$1" > /dev/null 2> /dev/null
 }
 
+wait_for() {
+    host="$1"
+    port="$2"
+    shift; shift
+
+    echo -n "checking for $host:$port "
+    docker run --name mysql-test --rm  \
+        -e "HOST=$host" -e "PORT=$port" \
+        alpine /bin/sh -c '
+        while ! nc -w 1 "$HOST" "$PORT" < /dev/null > /dev/null 2> /dev/null; do
+            echo -n "."
+            sleep 1
+        done'
+    echo " here!"
+}
+
 if [ ! -f ".env" ]; then
     echo ".env file does not exist, copying from .env.example"
     cp $SOURCE_DIR/.env.example $SOURCE_DIR/.env
@@ -62,3 +78,10 @@ set_dotenv_var DB_HOST "$(get_container_ip 3source-mysql)"
 docker run --name 3source-php --volumes-from 3source-data -d --link 3source-mysql:db dylanlindgren/docker-laravel-phpfpm
 # start the nginx webserver
 docker run --name 3source-web --volumes-from 3source-data -p 80:80 --link 3source-php:fpm -d dylanlindgren/docker-laravel-nginx  
+
+echo "waiting until mysql is ready for connections ... "
+wait_for "$(get_container_ip 3source-mysql)" 3306
+echo "migrating database"
+"$SOURCE_DIR/bin/artisan" migrate
+echo "seeding database"
+"$SOURCE_DIR/bin/artisan" db:seed
