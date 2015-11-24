@@ -1,0 +1,8 @@
+#!/bin/sh
+# pretty prints json from stdin and writes it to stdout
+docker run --rm -i node node -p '
+JSON.parse(
+    require("fs")
+        .readFileSync("/dev/stdin").toString()
+)
+'
