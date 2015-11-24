@@ -1,2 +1,2 @@
 #!/bin/sh
-"$(dirname "$0")/docker" run --link 3source-mysql:mysql -it --rm mysql sh -c "exec mysql -h\"\$MYSQL_PORT_3306_TCP_ADDR\" -P\"\$MYSQL_PORT_3306_TCP_PORT\" -uroot -p\"\$MYSQL_ENV_MYSQL_ROOT_PASSWORD\" $@"
+"$(dirname "$0")/docker-wrap" run --link 3source-mysql:mysql -it --rm mysql sh -c "exec mysql -h\"\$MYSQL_PORT_3306_TCP_ADDR\" -P\"\$MYSQL_PORT_3306_TCP_PORT\" -uroot -p\"\$MYSQL_ENV_MYSQL_ROOT_PASSWORD\" $@"
