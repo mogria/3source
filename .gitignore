@@ -7,3 +7,8 @@ Homestead.json
 .idea
 public/css
 www.iml
+*.log
+
+# vim
+*.sw*
+*~
