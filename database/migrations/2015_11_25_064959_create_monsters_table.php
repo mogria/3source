@@ -14,6 +14,9 @@ class CreateMonstersTable extends Migration
     {
         Schema::create('monsters', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('experience_drop');
+            $table->integer('energy_drop');
+            $table->foreign('dungeon_id')->references('id')->on('dungeons');
         });
     }
 
