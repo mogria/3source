@@ -27,3 +27,5 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::get('users', 'UserController@index');
 Route::get('users/{id}', 'UserController@show');
 
+Route::get('dungeons', 'DungeonController@index');
+Route::get('dungeons/{id}', 'DungeonController@show');

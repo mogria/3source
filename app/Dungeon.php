@@ -19,4 +19,11 @@ class Dungeon extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * Get the monsters in this dungeon
+     */
+    public function monsters() {
+        return $this->hasMany('App\Monsters');
+    }
 }
