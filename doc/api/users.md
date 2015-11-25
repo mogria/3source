@@ -8,10 +8,10 @@ Example:
 
     GET /users
     -----
-    [ { id: 1, name: 'Mogria', email: 'm0gr14@gmail.com' },
-      { id: 2, name: 'Alkazua', email: 'test-mail@localhost' },
-      { id: 3, name: 'Johnny Rotten', email: 'test-mail2@localhost' },
-      { id: 4, name: 'Sid Vicious', email: 'test-mail3@localhost' } ]
+    [ { id: 1, name: 'Mogria' },
+      { id: 2, name: 'Alkazua' },
+      { id: 3, name: 'Johnny Rotten' },
+      { id: 4, name: 'Sid Vicious' } ]
 
 ## GET `/users/{id}`
 
@@ -21,4 +21,4 @@ Example:
 
     GET /users/1
     ----- 
-    { id: 1, name: 'Mogria', email: 'm0gr14@gmail.com' }
+    { id: 1, name: 'Mogria' }
