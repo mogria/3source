@@ -1,13 +1,23 @@
-#!/bin/sh
-if [ "$(uname -o)" = "Cygwin" ]; then
-    if which console 2>/dev/null >/dev/null; then
-        exec console docker "$@"
-        exit $?
+#!/bin/bash
+
+ARGS=("$@")
+# is input coming from a terminal?
+if [ -t 0 ]; then
+    if [ "$1" = "run" ]; then
+        shift
+        ARGS=(run -t "$@")
     fi
-    echo "Cygwin needs the 'console' command from winpty in order to be able"
-    echo "to execute docker run -it."
-    echo "You can get winpty from here: https://github.com/rprichard/winpty"
-    echo "running docker anyway ... "
+
+    if [ "$(uname -o)" = "Cygwin" ]; then
+        if which console 2>/dev/null >/dev/null; then
+            exec console docker "${ARGS[@]}"
+            exit $?
+        fi
+        echo "Cygwin needs the 'console' command from winpty in order to be able"
+        echo "to execute docker run -it."
+        echo "You can get winpty from here: https://github.com/rprichard/winpty"
+        echo "running docker anyway ... "
+    fi
 fi
 
-exec docker "$@"
+exec docker "${ARGS[@]}"

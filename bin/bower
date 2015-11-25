@@ -1,2 +1,2 @@
 #!/bin/sh
-"$(dirname "$0")/docker-wrap" run --volumes-from 3source-data -e RUN_AS=$(id -u) -it --rm mogria/3source-npm bower "$@"
+"$(dirname "$0")/docker-wrap" run --volumes-from 3source-data -e RUN_AS=$(id -u) -i --rm mogria/3source-npm bower "$@"
