@@ -12,4 +12,11 @@ class Dungeon extends Model
      * @var string
      */
     protected $table = 'dungeons';
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

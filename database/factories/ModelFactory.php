@@ -17,5 +17,22 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->email,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
+        'level' => $faker->numberBetween(1, 20),
+        'experience' => 0,
+        'energy' => $faker->numberBetween(0, 3000),
+    ];
+});
+
+$factory->define(App\Dungeon::class, function(Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'min_level' => $faker->numberBetween(1, 20),
+    ];
+});
+
+$factory->define(App\Monster::class, function(Faker\Generator $faker) {
+    return [
+        'experience_drop' => $faker->numberBetween(10, 100),
+        'energy_drop' => $faker->numberBetween(10, 100),
     ];
 });

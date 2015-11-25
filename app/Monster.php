@@ -13,4 +13,11 @@ class Monster extends Model
      */
     protected $table = 'monsters';
 
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
 }
