@@ -65,6 +65,13 @@ As a base for our docker setup this artical was a great help: [Dylan Lindgren on
 * Run all the docker containers:
 
         % ./start.sh
+  
+  By default the web server listens on `0.0.0.0:80`. You can specify the bind
+  address and the port by setting the environment variables `WEB_PORT` and
+  `WEB_BIND_ADDRESS`. For example:
+        
+        % WEB_BIND_ADDRESS=127.0.0.1 WEB_PORT=80 ./start.sh
+
 
 Whats useful is to have this command running on an other terminal to see when errors occur:
 

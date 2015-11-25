@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# start.sh - Start the Application
+# This script starts all the required docker containers for this application to
+# run. The only thing you need is a docker installation and a bash shell.
+#
+# You can configure the port and the address the webserver binds to with
+# the two environment variables WEB_PORT and WEB_BIND_ADDRESS:
+#
+#   % WEB_PORT=3000 WEB_BIND_ADDRESS=127.0.0.1 ./start.sh
+#
+# If these environment variables are not set  web server listens on 0.0.0.0:80
+
 SOURCE_DIR="$( cd "$(dirname "$0")" && pwd)"
 VOLUME_ROOT="$( cd "$(dirname "$0")/.." && pwd)"
 
@@ -77,7 +88,7 @@ set_dotenv_var DB_HOST "$(get_container_ip 3source-mysql)"
 # start the php backend
 docker run --name 3source-php --volumes-from 3source-data -d --link 3source-mysql:db dylanlindgren/docker-laravel-phpfpm
 # start the nginx webserver
-docker run --name 3source-web --volumes-from 3source-data -p 80:80 --link 3source-php:fpm -d dylanlindgren/docker-laravel-nginx  
+docker run --name 3source-web --volumes-from 3source-data -p ${WEB_BIND_ADDRESS:-0.0.0.0}:${WEB_PORT:-80}:80 --link 3source-php:fpm -d dylanlindgren/docker-laravel-nginx  
 
 echo "waiting until mysql is ready for connections ... "
 wait_for "$(get_container_ip 3source-mysql)" 3306
