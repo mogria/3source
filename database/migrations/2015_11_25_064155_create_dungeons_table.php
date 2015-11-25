@@ -14,6 +14,8 @@ class CreateDungeonsTable extends Migration
     {
         Schema::create('dungeons', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 255);
+            $table->integer('min_level')->unsigned();
         });
     }
 
