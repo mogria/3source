@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMonstersTable extends Migration
+class AddDungeonIdToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,7 @@ class CreateMonstersTable extends Migration
      */
     public function up()
     {
-        Schema::create('monsters', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('experience_drop');
-            $table->integer('energy_drop');
+        Schema::table('users', function (Blueprint $table) {
             $table->integer('dungeon_id')->unsigned()->nullable()->default(null);
             $table->foreign('dungeon_id')->references('id')->on('dungeons');
         });
@@ -28,6 +25,8 @@ class CreateMonstersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('monsters');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('dungeon_id');
+        });
     }
 }
