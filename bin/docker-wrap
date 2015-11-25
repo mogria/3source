@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ARGS=("$@")
-# is input coming from a terminal?
-if [ -t 0 ]; then
+# is are stdin, stdout and stderr connected terminal?
+if [ -t 0 ] && [ -t 1 ] && [ -t 2 ]; then
     if [ "$1" = "run" ]; then
         shift
         ARGS=(run -t "$@")
