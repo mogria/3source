@@ -1,5 +1,5 @@
-#!/bin/sh
-OPTS="$@"
+#!/bin/bash
+OPTS=("$@")
 if [ -z "$1" ]; then
     OPTS[0]="3source"
 fi
