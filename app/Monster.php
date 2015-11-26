@@ -20,4 +20,6 @@ class Monster extends Model
      */
     public $timestamps = false;
 
+    protected $hidden = ['dungeon_id'];
+
 }

@@ -24,6 +24,6 @@ class Dungeon extends Model
      * Get the monsters in this dungeon
      */
     public function monsters() {
-        return $this->hasMany('App\Monsters');
+        return $this->hasMany('App\Monster');
     }
 }
