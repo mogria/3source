@@ -22,7 +22,8 @@ Route::get('/play', ['middleware' => 'auth', function() {
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
-Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::get('register', 'Auth\AuthController@getRegister');
+Route::post('register', 'Auth\AuthController@postRegister');
 
 Route::get('users', 'UserController@index');
 Route::get('users/{id}', 'UserController@show');

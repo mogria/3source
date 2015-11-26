@@ -28,6 +28,6 @@ class DungeonController extends Controller
      */
     public function show($id)
     {
-        return Dungeon::findOrFail($id);
+        return Dungeon::with('monsters')->where('id', $id)->firstOrFail();
     }
 }

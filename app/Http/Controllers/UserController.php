@@ -11,9 +11,11 @@ use App\User;
 
 class UserController extends Controller
 {
+    protected $layout = 'layouts.master';
+
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**

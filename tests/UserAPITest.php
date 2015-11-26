@@ -9,6 +9,7 @@ use App\User;
 class UserAPITest extends TestCase
 {
     use DatabaseTransactions;
+    use WithoutMiddleware;
 
     protected $users;
 

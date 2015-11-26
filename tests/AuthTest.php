@@ -28,7 +28,7 @@ class AuthTest extends TestCase
 
         $this->johnny = factory(\App\User::class)->create([
             'name' => 'johnny',
-            'email' => 'johnny@localhost',
+            'email' => 'johnny@example.com',
             'password' => Hash::make('whatever')
         ]);
         $this->johnny->save();
@@ -38,10 +38,10 @@ class AuthTest extends TestCase
      * helper method to login on web page
      * with given username and password
      */
-    protected function loginAs($username, $password)
+    protected function loginUser($username, $password)
     {
         return $this->visit('/')
-            ->type($username, 'username')
+            ->type($username, 'name')
             ->type($password, 'password')
             ->press('Login');
 
@@ -56,7 +56,7 @@ class AuthTest extends TestCase
         if($password_confirmation === null) $password_confirmation = $password;
 
         return $this->visit('/register')
-            ->type($username, 'username')
+            ->type($username, 'name')
             ->type($email, 'email')
             ->type($password, 'password')
             ->type($password_confirmation, 'password_confirmation')
@@ -69,7 +69,7 @@ class AuthTest extends TestCase
      */
     public function testLoginFailNoUser()
     {
-        $this->loginAs('does-not-exist', 'doesnt-matter-anyway')
+        $this->loginUser('does-not-exist', 'doesnt-matter-anyway')
              ->seePageIs('/');
     }
 
@@ -79,8 +79,8 @@ class AuthTest extends TestCase
      */
     public function testLoginFailWrongPassword()
     {
-        $this->loginAs('johnny', 'wrong-password')
-             ->seePageIs('/');
+        $this->loginUser('johnny', 'wrong-password')
+            ->seePageIs('/');
     }
 
 
@@ -91,7 +91,7 @@ class AuthTest extends TestCase
      */
     public function testLogin()
     {
-        $this->loginAs('johnny', 'whatever')
+        $this->loginUser('johnny', 'whatever')
              ->seePageIs('/play');
     }
 
@@ -100,15 +100,15 @@ class AuthTest extends TestCase
      */
     public function testRegister()
     {
-        $this->registerUser('joe', 'joe@localhost', 'whatelse');
-        $this->seeInDatabase('users', ['name' => 'joe', 'email' => 'joe@localhost']);
-        $this->assertRedirectedToRoute('/');
+        $this->registerUser('joe', 'joe@example.com', 'whatelse')
+            ->seePageIs('/play');
+        $this->seeInDatabase('users', ['name' => 'joe', 'email' => 'joe@example.com']);
     }
 
     public function testRegisterAndLogin() {
-        $this->registerUser('joe', 'joe@localhost', 'somepw');
-        $this->loginUser('joe', 'somepw');
-        $this->assertRedirectedToRoute('/register');
+        $this->registerUser('joe', 'joe@example.com', 'somepw');
+        $this->visit('auth/logout')->seePageIs('/');
+        $this->loginUser('joe', 'somepw')->seePageIs('/play');
     }
 
     /**
@@ -116,7 +116,7 @@ class AuthTest extends TestCase
      * passwords are entered
      */
     public function testRegisterFailPasswordConfirmation() {
-        $this->registerUser('joe', 'joe@localhost', 'whatelse', '_whatelse');
+        $this->registerUser('joe', 'joe@example.com', 'whatelse', '_whatelse');
         $this->seePageIs('/register');
     }
 
@@ -125,7 +125,7 @@ class AuthTest extends TestCase
      * is already taken
      */
     public function testRegisterFailUsernameTaken() {
-        $this->registerUser('johnny', 'joe@localhost', 'whatelse');
+        $this->registerUser('johnny', 'joe@example.com', 'whatelse');
         $this->seePageIs('/register');
     }
 
