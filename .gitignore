@@ -13,3 +13,6 @@ www.iml
 # vim
 *.sw*
 *~
+
+#composer
+composer.phar

@@ -17,8 +17,12 @@ elixir(function(mix) {
 
     mix.scripts([
         'components/angular/angular.js',
+        'components/angular-route/angular-route.js',
         'components/jquery/dist/jquery.js',
         'components/spritely/src/jquery.spritely.js',
-        'trailer.js',
+        'app.js',
+        'controllers.js',
+        'routes.js',
+        'controllers/HomeCtrl.js'
     ], 'public/js/all.js')
 });
