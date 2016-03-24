@@ -13,7 +13,10 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     //mix.stylesIn("public/css");
-    mix.sass('app.scss');
+    mix.sass([
+        'app.scss',
+        'droid-sans-mono-dotted.scss'
+    ]);
 
     mix.scripts([
         'components/angular/angular.js',
@@ -23,7 +26,7 @@ elixir(function(mix) {
         'app.js',
         'routes.js',
         'services.js',
-        'services/DungeonService.js'
+        'services/DungeonService.js',
         'controllers.js',
         'controllers/HomeCtrl.js',
     ], 'public/js/all.js')
