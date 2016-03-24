@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Support\Facades\View as View;
 
 class Kernel extends HttpKernel
 {
@@ -30,4 +31,9 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
     ];
+
+    public function bootstrap() {
+        parent::bootstrap();
+        View::addExtension('html', 'php');
+    }
 }

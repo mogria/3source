@@ -21,8 +21,10 @@ elixir(function(mix) {
         'components/jquery/dist/jquery.js',
         'components/spritely/src/jquery.spritely.js',
         'app.js',
-        'controllers.js',
         'routes.js',
-        'controllers/HomeCtrl.js'
+        'services.js',
+        'services/DungeonService.js'
+        'controllers.js',
+        'controllers/HomeCtrl.js',
     ], 'public/js/all.js')
 });

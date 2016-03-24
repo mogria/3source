@@ -12,7 +12,7 @@
         </div>
 
         <script type="text/ng-template" id="home.html">
-            <h1>home</h1>
+            @include('play/home')
         </script>
     </body>
 </html>

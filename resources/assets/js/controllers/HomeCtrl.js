@@ -1,8 +1,12 @@
 var controllers = angular.module('3source.controllers');
 
 controllers
-.controller('HomeCtrl', ['$rootScope', '$scope', function($rootScope, $scope){
+.controller('HomeCtrl', ['$rootScope', '$scope', 'dungeonService', function($rootScope, $scope, dungeonService){
     $rootScope.booted = true;
-    $scope.items = ['One', 'Two', 'And', 'Three', 'Makes', 'Six'];
+    dungeonService.getDungeons(function(result) {
+        console.log(result);
+        $scope.dungeons = result.data;
+    }, function(error) {
+    });
 
 }]);
