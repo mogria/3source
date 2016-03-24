@@ -27,6 +27,7 @@ Route::post('register', 'Auth\AuthController@postRegister');
 
 Route::get('users', 'UserController@index');
 Route::get('users/{id}', 'UserController@show');
+Route::put('users/{id}', 'UserController@update');
 
 Route::get('dungeons', 'DungeonController@index');
 Route::get('dungeons/{id}', 'DungeonController@show');

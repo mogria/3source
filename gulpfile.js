@@ -27,6 +27,7 @@ elixir(function(mix) {
         'routes.js',
         'services.js',
         'services/DungeonService.js',
+        'services/UserService.js',
         'controllers.js',
         'controllers/HomeCtrl.js',
     ], 'public/js/all.js')

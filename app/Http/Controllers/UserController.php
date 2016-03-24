@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 
+use Illuminate\Support\Facades\Auth as Auth;
+
 class UserController extends Controller
 {
     protected $layout = 'layouts.master';
@@ -59,7 +61,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // TODO
+        if(Auth::user()->id === (int)$id) {
+            $user = User::findOrFail($id);
+            $user->update($request->all());
+            return $user;
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => "you can only change your own users properties"
+            ], 403);
+        }
     }
 
     /**

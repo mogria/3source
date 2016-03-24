@@ -2,6 +2,6 @@
 <div id="dungeons">
     <div ng-repeat="dungeon in dungeons" class="dungeon">
         <h2>#{{dungeon.id}}: {{dungeon.name}}</h2>
-        <p>Level {{dungeon.min_level}}</p>
+        <p>Level {{dungeon.min_level}}: <a ng-click="enterDungeon(dungeon.id)">Enter</a></p>
     </div>
 </div>
